@@ -11,9 +11,12 @@ import RealmSwift
 
 class TodoListViewController: UITableViewController {
   
-  var todoItems : Results<Item>?
+  //Initialize a new access point to the Realm database
   let realm = try! Realm()
-  
+
+  // Create a variable that is a collection of results that are Item objects
+  var todoItems : Results<Item>?
+
   var selectedCategory : Category? {
     didSet {
       loadItems()
@@ -57,6 +60,7 @@ class TodoListViewController: UITableViewController {
     return cell
   }
   
+  
   //MARK: - TableView Delegate Methods
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -71,6 +75,7 @@ class TodoListViewController: UITableViewController {
       }
     }
     
+    // Call all the Tableview Datasource methods
     tableView.reloadData()
     
     tableView.deselectRow(at: indexPath, animated: true)
@@ -102,6 +107,7 @@ class TodoListViewController: UITableViewController {
         }
       }
       
+      // Call all the Tableview Datasource methods
       self.tableView.reloadData()
       
     }
@@ -125,6 +131,7 @@ class TodoListViewController: UITableViewController {
     
     todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
     
+    // Call all the Tableview Datasource methods
     tableView.reloadData()
   }
   
@@ -139,10 +146,10 @@ extension TodoListViewController: UISearchBarDelegate {
 
     todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text).sorted(byKeyPath: "dateCreated", ascending: true)
     
+    // Call all the Tableview Datasource methods
     tableView.reloadData()
     
   }
-
 
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchBar.text?.count == 0 {
