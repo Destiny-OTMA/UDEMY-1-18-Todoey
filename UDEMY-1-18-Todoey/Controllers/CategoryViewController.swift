@@ -22,8 +22,8 @@ class CategoryViewController: SwipeTableViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
 
-    //    This next line prints the location of the Realm database when un-commented out
-    //    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+    //  This next line prints the location of the Realm database when un-commented out
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
     loadCategories()
     
@@ -59,6 +59,7 @@ class CategoryViewController: SwipeTableViewController {
     // Then save the color as a UIColor.
     // cell.backgroundColor = UIColor(hexstring: cellBGColor)
     cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].cellBGColor ?? "1D9BF6")
+    cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true) // sets text to contrast the background color
 
     return cell
     
